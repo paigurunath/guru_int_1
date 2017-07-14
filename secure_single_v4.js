@@ -1,4 +1,5 @@
 var noble = require('noble');
+var fs = require('fs');
 
 // Search only for the Service UUID of the device (remove dashes)
 var IMU_SERVICE_UUID = '917649a0d98e11e59eec0002a5d5c51b';
@@ -20,41 +21,6 @@ var uid_single2 = ['917649a2d98e11e59eec0002a5d5c51b']
 	});
 
 
-// try{
-
-// var Sequelize = require('sequelize');
-
-// const sequelize = new Sequelize('db', 'root', 'root', {
-//   host: 'localhost',
-//   dialect: 'mysql'
-// });
-
-// sequelize
-//   .authenticate()
-//   .then(() => {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch(err => {
-//     console.error('Unable to connect to the database:', err);
-//   });
-
-//   //to create the table
-// const Sensor = sequelize.define('sensor', {
-//   accelx: {
-//     type: Sequelize.REAL
-//   },
-//   accely: {
-//     type: Sequelize.REAL
-//   },
-//   accelz: {
-//     type: Sequelize.REAL
-//   }
-// });
-
-
-// } catch(err) {
-// 	console.log("Error in DB operation :"+ err);
-// }
 
 try {
 	// Discover the peripheral's IMU service and corresponding characteristics
@@ -82,29 +48,26 @@ try {
 
 					  console.log( "Ax : " + data.readFloatLE(0) + "Ay : " + data.readFloatLE(4) + "Az : " + data.readFloatLE(8));
 
-					  var insertAxcel = {
-					  	accelx : data.readFloatLE(0),
-					  	accely : data.readFloatLE(4),
-					  	accelz : data.readFloatLE(8)
-					  };
+					  var writeDataValue = '{' + data.readFloatLE(0) + ',' + data.readFloatLE(4) + ',' + data.readFloatLE(8) + '},'
+					  fs.appendFileSync('accel1.txt', writeDataValue);
+					  // var insertAxcel = {
+					  // 	accelx : data.readFloatLE(0),
+					  // 	accely : data.readFloatLE(4),
+					  // 	accelz : data.readFloatLE(8)
+					  // }
 
-					  console.log(insertAxcel);
-					  
+					 //  Sensor.create(insertAxcel).then(function(data) {
+						// console.log("saved");
+						// }).catch(function(error) {
+						//     console.log("error :" + error);
+						// });
 					});
 			        // to enable notify
 			        characteristic.subscribe(function(error) {
 			          console.log('AX notification on');
 			    	});
 
-		   //  		Sensor.create({
-					//   accelx: data.readFloatLE(0),
-					//   accely: data.readFloatLE(4),
-					//   accelz: data.readFloatLE(8)
-					// }).then(function(data) {
-					// 	console.log("saved");
-					// }).catch(function(error) {
-					//     console.log("error :" + error);
-					// });
+		    		
 		    	} else {
 
 		    		console.log("else");
@@ -113,6 +76,9 @@ try {
 					characteristic.on('read', function(data, isNotification) {
 
 					  console.log( "Gx : " + data.readFloatLE(0) + "Gy : " + data.readFloatLE(4) + "Gz : " + data.readFloatLE(8));
+
+					  var writeDataValueGyro = '{' + data.readFloatLE(0) + ',' + data.readFloatLE(4) + ',' + data.readFloatLE(8) + '},'
+					  fs.appendFileSync('gyro1.txt', writeDataValueGyro);
 					});
 			        // to enable notify
 			        characteristic.subscribe(function(error) {
