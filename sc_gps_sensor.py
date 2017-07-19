@@ -3,6 +3,7 @@ import pynmea2
 import os
 import signal
 import sys
+import json, urllib2
 from threading import Timer
 from serial import SerialException
 
@@ -62,7 +63,17 @@ while True:
                  longitude = prvLongitude
 
             print 'GPS coordinates :',latitude,longitude
-                 
+
+            data = {
+                'latval': latitude,
+                'longval': longitude
+            }
+
+            req = urllib2.Request('http://localhost:8080/saveLatLong')
+            req.add_header('Content-Type', 'application/json')
+
+            response = urllib2.urlopen(req, json.dumps(data))
+
             if latitude!='':
                 file = open(os.path.join("/home/pi/Downloads","GS_DATA"),"w")
                 
