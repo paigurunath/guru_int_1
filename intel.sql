@@ -21,3 +21,12 @@ CREATE TABLE `accel` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 SELECT * FROM db.gyro;
+
+CREATE TABLE `latlong` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `latval` decimal(14,10) NOT NULL,
+  `longval` decimal(14,10) NOT NULL,
+  `createdat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+SELECT * FROM db.latlong;
