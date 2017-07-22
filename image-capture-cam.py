@@ -1,4 +1,5 @@
 import cv2
+import time
 
 # Camera 0 is the integrated web cam on my netbook
 camera_port = 0
@@ -20,16 +21,18 @@ def get_image():
 
 # Ramp the camera - these frames will be discarded and are only used to allow v4l2
 # to adjust light levels, if necessary
-for i in xrange(ramp_frames):
-    temp = get_image()
-print("Taking image...")
-# Take the actual image we want to keep
-camera_capture = get_image()
-file = "/home/pi/Documents/intel_ui/intel_app_ui/public/dist/img/pothole/pothole1.jpg"
-# A nice feature of the imwrite method is that it will automatically choose the
-# correct format based on the file extension you provide. Convenient!
-cv2.imwrite(file, camera_capture)
+while True:
+    for i in xrange(ramp_frames):
+        temp = get_image()
+    print("Taking image...")
+    # Take the actual image we want to keep
+    camera_capture = get_image()
+    file = "/home/pi/Documents/intel_ui/intel_app_ui/public/dist/img/pothole/pothole1.jpg"
+    # A nice feature of the imwrite method is that it will automatically choose the
+    # correct format based on the file extension you provide. Convenient!
+    cv2.imwrite(file, camera_capture)
 
-# You'll want to release the camera, otherwise you won't be able to create a new
-# capture object until your script exits
-del (camera)
+    # You'll want to release the camera, otherwise you won't be able to create a new
+    # capture object until your script exits
+    del (camera)
+    time.sleep(1)
