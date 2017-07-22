@@ -49,7 +49,8 @@ while True:
         
         if recv.find('$GPGGA')!=-1:
             msg=pynmea2.parse(recv)
-            print msg
+            print 'pynmea msg', msg
+            print 'msg.latitude', msg.latitude
             latitude=msg.latitude
             longitude=msg.longitude
             

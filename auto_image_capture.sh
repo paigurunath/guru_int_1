@@ -1,0 +1,1 @@
+python /home/pi/Documents/image-capture-cam.py
