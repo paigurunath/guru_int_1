@@ -34,5 +34,6 @@ while True:
 
     # You'll want to release the camera, otherwise you won't be able to create a new
     # capture object until your script exits
-    del (camera)
     time.sleep(1)
+
+del (camera)
