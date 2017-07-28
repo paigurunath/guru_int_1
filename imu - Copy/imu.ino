@@ -196,10 +196,10 @@ void loop() {
      
      
      // These statements are for debugging puposes only and can be commented out to increae the efficiency of the sketch.
-     //Serial.print( "(ax,ay,az): " ); 
-     Serial.print("{\"accelx\":"); Serial.print(accData.a[0]); Serial.print(",\"accely\":"); Serial.print(accData.a[1]); Serial.print(",\"accelz\":"); Serial.print(accData.a[2]); Serial.print("}");Serial.println();
-     //Serial.print( "(gx,gy,gz): " ); 
-     Serial.print("{\"gyrox\":"); Serial.print(gyroData.g[0]); Serial.print(",\"gyroy\":"); Serial.print(gyroData.g[1]); Serial.print(",\"gyroz\":"); Serial.print(gyroData.g[2]); Serial.print("}");Serial.println();
+     Serial.print( "(ax,ay,az): " ); 
+     Serial.print("("); Serial.print(accData.a[0]); Serial.print(","); Serial.print(accData.a[1]); Serial.print(","); Serial.print(accData.a[2]); Serial.print(")");Serial.println();
+     Serial.print( "(gx,gy,gz): " ); 
+     Serial.print("("); Serial.print(gyroData.g[0]); Serial.print(","); Serial.print(gyroData.g[1]); Serial.print(","); Serial.print(gyroData.g[2]); Serial.print(")");Serial.println();
      
      
       
